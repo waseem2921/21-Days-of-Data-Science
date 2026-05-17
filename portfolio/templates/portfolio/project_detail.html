@@ -1,0 +1,89 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Day {{ project.day_number }} | {{ project.title }}{% endblock %}
+
+{% block content %}
+<section class="project-banner py-5">
+    <div class="container py-4">
+        <a class="text-decoration-none small" href="{% url 'home' %}#projects">&larr; Back to projects</a>
+        <div class="banner-card mt-3">
+            <span class="day-chip">Day {{ project.day_number }}</span>
+            <h1 class="display-6 fw-bold mt-3">{{ project.title }}</h1>
+            <p class="lead mb-0">{{ project.short_description }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-4">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="content-card mb-4">
+                    <h3>Project Overview</h3>
+                    <p>{{ project.description|linebreaks }}</p>
+                </div>
+
+                <div class="content-card mb-4">
+                    <h3>Problem Statement</h3>
+                    <p>{{ project.problem_statement|linebreaks }}</p>
+                </div>
+
+                <div class="content-card mb-4">
+                    <h3>Dataset Information</h3>
+                    <p>{{ project.dataset_information|linebreaks }}</p>
+                </div>
+
+                <div class="content-card mb-4">
+                    <h3>Steps Performed</h3>
+                    <p>{{ project.steps_performed|linebreaks }}</p>
+                </div>
+
+                <div class="content-card mb-4">
+                    <h3>Insights Discovered</h3>
+                    <p>{{ project.insights_discovered|linebreaks }}</p>
+                </div>
+
+                <div class="content-card mb-4">
+                    <h3>Conclusion</h3>
+                    <p>{{ project.conclusion|linebreaks }}</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="content-card mb-4">
+                    <h4>Tools Used</h4>
+                    <p>{{ project.tools_used|linebreaks }}</p>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        {% for tech in project.tech_list %}
+                            <span class="badge badge-tech">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% if project.github_link %}
+                    <div class="content-card mb-4">
+                        <h4>GitHub Repository</h4>
+                        <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-accent w-100">Open GitHub Link</a>
+                    </div>
+                {% endif %}
+
+                {% if project.image %}
+                    <div class="content-card mb-4">
+                        <h4>Preview</h4>
+                        <img src="{{ project.image.url }}" class="img-fluid rounded" alt="{{ project.title }}">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if project.dashboard_embed_link %}
+            <div class="content-card mb-4">
+                <h3>Interactive Dashboard</h3>
+                <div class="ratio ratio-16x9">
+                    <iframe src="{{ project.dashboard_embed_link }}" title="Dashboard" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

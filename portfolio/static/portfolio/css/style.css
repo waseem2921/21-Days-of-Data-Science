@@ -1,0 +1,230 @@
+:root {
+    --bg: #f5f7fb;
+    --surface: rgba(255, 255, 255, 0.8);
+    --surface-strong: #ffffff;
+    --text: #122236;
+    --muted: #5b6a7c;
+    --accent: #1565c0;
+    --accent-2: #00a878;
+    --border: rgba(18, 34, 54, 0.12);
+    --shadow: 0 18px 45px rgba(26, 52, 84, 0.12);
+}
+
+html[data-theme="dark"] {
+    --bg: #0d1521;
+    --surface: rgba(16, 27, 42, 0.82);
+    --surface-strong: #122033;
+    --text: #e8eef5;
+    --muted: #9eb1c7;
+    --accent: #4ea8ff;
+    --accent-2: #43d9a3;
+    --border: rgba(255, 255, 255, 0.11);
+    --shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: radial-gradient(circle at 12% 18%, rgba(21, 101, 192, 0.08), transparent 30%),
+                radial-gradient(circle at 85% 12%, rgba(0, 168, 120, 0.08), transparent 28%),
+                var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", sans-serif;
+    min-height: 100vh;
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6,
+.brand-title,
+.section-title,
+.hero-title {
+    font-family: "Sora", sans-serif;
+}
+
+.navbar-glass {
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+}
+
+.brand-title {
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.btn-theme {
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.hero-title {
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    max-width: 680px;
+    color: var(--muted);
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.86rem;
+}
+
+.btn-accent {
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    border: none;
+    color: #fff;
+}
+
+.btn-accent:hover {
+    opacity: 0.94;
+    color: #fff;
+}
+
+.glass-card,
+.stat-card,
+.project-card,
+.about-panel,
+.banner-card,
+.content-card,
+.search-filter-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.highlight-list li {
+    position: relative;
+    padding-left: 1.35rem;
+    margin-bottom: 0.65rem;
+}
+
+.highlight-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.52rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+}
+
+.stat-card {
+    padding: 1.5rem;
+    transition: transform 0.24s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.counter {
+    font-size: clamp(2rem, 4.3vw, 3rem);
+    margin-bottom: 0.2rem;
+    color: var(--accent);
+}
+
+.search-filter-form {
+    padding: 1rem;
+}
+
+.form-control,
+.form-select {
+    border-color: var(--border);
+    background: var(--surface-strong);
+    color: var(--text);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(21, 101, 192, 0.16);
+}
+
+.project-card {
+    overflow: hidden;
+    transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+}
+
+.project-card-inner {
+    padding: 1.2rem;
+}
+
+.day-chip {
+    align-self: flex-start;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    padding: 0.34rem 0.82rem;
+    font-weight: 600;
+}
+
+.badge-tech {
+    background: rgba(21, 101, 192, 0.13);
+    color: var(--accent);
+    border-radius: 999px;
+    font-weight: 600;
+    padding: 0.42rem 0.72rem;
+}
+
+.about-panel,
+.banner-card,
+.content-card {
+    padding: 1.6rem;
+}
+
+.footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.footer-link {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.footer-link:hover {
+    border-color: var(--accent);
+}
+
+.bg-orb {
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: -1;
+    opacity: 0.35;
+}
+
+.bg-orb-1 {
+    background: #2f91ff;
+    left: -70px;
+    top: 220px;
+}
+
+.bg-orb-2 {
+    background: #15b988;
+    right: -70px;
+    top: 90px;
+}
+
+@media (max-width: 992px) {
+    .navbar-nav {
+        padding-top: 0.8rem;
+    }
+}

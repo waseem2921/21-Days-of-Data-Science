@@ -1,0 +1,125 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Home | 21 Days of Data Science{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5" id="home">
+    <div class="container py-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <p class="eyebrow mb-3">Data Science Portfolio</p>
+                <h1 class="display-5 fw-bold hero-title">21 Days of Data Science Experiments</h1>
+                <p class="lead mt-3 hero-subtitle">
+                    A journey of solving real-world problems using Data Science, Python, AI, Analytics, and Visualization.
+                </p>
+                <div class="d-flex gap-3 mt-4 flex-wrap">
+                    <a href="#projects" class="btn btn-accent btn-lg">Explore Projects</a>
+                    <a href="#about" class="btn btn-outline-secondary btn-lg">About Me</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="glass-card p-4 h-100">
+                    <h5 class="mb-3">Portfolio Highlights</h5>
+                    <ul class="list-unstyled mb-0 highlight-list">
+                        <li>21 hands-on mini projects</li>
+                        <li>SQL, Python, ML, and BI workflows</li>
+                        <li>Visual storytelling and dashboards</li>
+                        <li>Production-ready web presentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section py-4">
+    <div class="container">
+        <div class="row g-3 text-center">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <h2 class="counter" data-target="{{ stats.projects }}">0</h2>
+                    <p>Total Projects</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <h2 class="counter" data-target="{{ stats.technologies }}">0</h2>
+                    <p>Technologies Used</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <h2 class="counter" data-target="{{ stats.hours }}">0</h2>
+                    <p>Hours Practiced</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="projects-section py-5" id="projects">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+            <h2 class="section-title mb-0">Project Dashboard</h2>
+            <span class="text-muted">Day 1 to Day 21</span>
+        </div>
+
+        <form method="get" class="search-filter-form mb-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="q" value="{{ query }}" placeholder="Search by title, description, or technology">
+                </div>
+                <div class="col-md-4">
+                    <select name="technology" class="form-select">
+                        <option value="">Filter by technology</option>
+                        {% for tech in all_technologies %}
+                            <option value="{{ tech }}" {% if technology_filter == tech %}selected{% endif %}>{{ tech }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 d-grid">
+                    <button class="btn btn-accent" type="submit">Apply</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row g-4">
+            {% for project in projects %}
+                <div class="col-md-6 col-xl-4">
+                    <article class="project-card h-100">
+                        <div class="project-card-inner d-flex flex-column h-100">
+                            <span class="day-chip">Day {{ project.day_number }}</span>
+                            <h3 class="h5 mt-3">{{ project.title }}</h3>
+                            <p class="text-muted mb-3">{{ project.short_description }}</p>
+                            <div class="mb-4 d-flex flex-wrap gap-2">
+                                {% for tech in project.tech_list %}
+                                    <span class="badge badge-tech">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mt-auto">
+                                <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary w-100">View Project</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info mb-0">No projects found. Add projects from Django Admin at <strong>/admin</strong>.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="about-section py-5" id="about">
+    <div class="container">
+        <div class="about-panel">
+            <h2 class="section-title">About</h2>
+            <p class="mb-0">
+                Aspiring Data Scientist and AI Engineer passionate about solving real-world problems using data.
+                This 21-day portfolio captures continuous learning, practical experimentation, and clear storytelling.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

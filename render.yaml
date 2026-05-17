@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: 21-days-of-data-science
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn data_science.wsgi:application"
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "21-days-of-data-science.onrender.com"
+      - key: DJANGO_CSRF_TRUSTED_ORIGINS
+        value: "https://21-days-of-data-science.onrender.com"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: data-science-db
+          property: connectionString
+
+databases:
+  - name: data-science-db
+    plan: free
+    databaseName: data_science
+    user: data_science_user
