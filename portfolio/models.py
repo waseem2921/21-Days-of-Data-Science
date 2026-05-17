@@ -3,6 +3,10 @@ from django.urls import reverse
 
 
 class Project(models.Model):
+	class PowerBIEmbedMode(models.TextChoices):
+		PUBLIC = "public", "Public link"
+		PRIVATE = "private", "Private / secure"
+
 	day_number = models.PositiveSmallIntegerField(unique=True)
 	title = models.CharField(max_length=180)
 	short_description = models.CharField(max_length=280)
@@ -17,6 +21,14 @@ class Project(models.Model):
 	image = models.ImageField(upload_to="projects/", blank=True, null=True)
 	github_link = models.URLField(blank=True)
 	dashboard_embed_link = models.URLField(blank=True)
+	powerbi_report_id = models.CharField(max_length=128, blank=True, help_text="Power BI report ID from the service workspace.")
+	powerbi_workspace_id = models.CharField(max_length=128, blank=True, help_text="Power BI workspace/group ID.")
+	powerbi_embed_mode = models.CharField(
+		max_length=16,
+		choices=PowerBIEmbedMode.choices,
+		default=PowerBIEmbedMode.PUBLIC,
+		help_text="Choose public embedding for publish-to-web or private for secure embed later.",
+	)
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	class Meta:
@@ -31,3 +43,7 @@ class Project(models.Model):
 	@property
 	def tech_list(self):
 		return [item.strip() for item in self.technologies_used.split(",") if item.strip()]
+
+	@property
+	def has_powerbi_metadata(self):
+		return bool(self.powerbi_report_id or self.powerbi_workspace_id or self.dashboard_embed_link)

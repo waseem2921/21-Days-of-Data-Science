@@ -76,6 +76,9 @@ class Command(BaseCommand):
                     "technologies_used": TECH_STACKS[index - 1],
                     "github_link": "https://github.com/",
                     "dashboard_embed_link": "",
+                    "powerbi_report_id": "",
+                    "powerbi_workspace_id": "",
+                    "powerbi_embed_mode": "public",
                 },
             )
             if created:

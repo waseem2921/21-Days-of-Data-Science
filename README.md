@@ -88,3 +88,12 @@ A modern Django portfolio app to showcase Day 1 to Day 21 Data Science and Analy
 - Gunicorn used for WSGI
 - Postgres-ready through `dj-database-url`
 - Media files are stored locally by default; use object storage for production scale
+
+## Cloudinary and Neon
+
+- Set these env vars when using Cloudinary for project images:
+   - `CLOUDINARY_CLOUD_NAME`
+   - `CLOUDINARY_API_KEY`
+   - `CLOUDINARY_API_SECRET`
+- Set `DATABASE_URL` to your Neon Postgres connection string to use Neon locally or on Render.
+- When these env vars are present, Django will store uploaded media in Cloudinary and connect to Neon through `DATABASE_URL`.

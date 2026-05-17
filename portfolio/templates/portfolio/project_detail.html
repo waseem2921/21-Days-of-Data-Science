@@ -60,6 +60,19 @@
                     </div>
                 </div>
 
+                {% if project.has_powerbi_metadata %}
+                    <div class="content-card mb-4">
+                        <h4>Power BI Details</h4>
+                        <div class="small text-muted mb-2">Embed mode: {{ project.get_powerbi_embed_mode_display }}</div>
+                        {% if project.powerbi_report_id %}
+                            <div class="mb-2"><strong>Report ID:</strong> {{ project.powerbi_report_id }}</div>
+                        {% endif %}
+                        {% if project.powerbi_workspace_id %}
+                            <div class="mb-2"><strong>Workspace ID:</strong> {{ project.powerbi_workspace_id }}</div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
                 {% if project.github_link %}
                     <div class="content-card mb-4">
                         <h4>GitHub Repository</h4>
@@ -79,6 +92,9 @@
         {% if project.dashboard_embed_link %}
             <div class="content-card mb-4">
                 <h3>Interactive Dashboard</h3>
+                {% if project.powerbi_embed_mode == 'private' %}
+                    <p class="text-muted small mb-3">This project is marked for secure/private embedding. Add a backend embed-token flow later to display the report without publish-to-web.</p>
+                {% endif %}
                 <div class="ratio ratio-16x9">
                     <iframe src="{{ project.dashboard_embed_link }}" title="Dashboard" allowfullscreen loading="lazy"></iframe>
                 </div>
