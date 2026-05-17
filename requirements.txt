@@ -3,7 +3,7 @@ gunicorn==22.0.0
 whitenoise==6.8.2
 dj-database-url==2.2.0
 python-dotenv==1.0.1
-psycopg2-binary==2.9.9
+psycopg[c]==3.3.4
 Pillow==11.2.1
 django-cloudinary-storage==0.3.0
 cloudinary==1.41.0
